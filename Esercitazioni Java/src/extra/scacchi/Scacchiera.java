@@ -16,19 +16,26 @@ public class Scacchiera {
 	public void turn(){
 		int x,y;
 		Casella c1, c2;
-		System.out.println("Fai la tua mossa, giocatore" + this.currentPlayer);
-		System.out.println("Muovi dalla casella di riga: ");
-		x = scanner.nextInt();
-		System.out.println("               e di colonna: ");
-		y = scanner.nextInt();
-		c1 = new Casella(x,y);
-		System.out.println("Alla casella di riga: ");
-		x = scanner.nextInt();
-		System.out.println("        e di colonna: ");
-		y = scanner.nextInt();
-		c2 = new Casella(x,y);
+		Pezzo p;
+		try {
+			System.out.println("Fai la tua mossa, giocatore" + this.currentPlayer);
+			System.out.println("Muovi dalla casella di riga: ");
+			x = scanner.nextInt();
+			System.out.println("               e di colonna: ");
+			y = scanner.nextInt();
+			c1 = new Casella(x,y);
+			System.out.println("Alla casella di riga: ");
+			x = scanner.nextInt();
+			System.out.println("        e di colonna: ");
+			y = scanner.nextInt();
+			c2 = new Casella(x,y);			
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return;
+		}
 		
-		if(this.getPezzo(c1).mossaValida(this, c1, c2)){
+		p = this.getPezzo(c1);
+		if(p.getColor()==currentPlayer && p.mossaValida(this, c1, c2)){
 			this.setPezzo(this.unsetPezzo(c1), c2);
 			
 			//cambia giocatore
@@ -45,6 +52,10 @@ public class Scacchiera {
 	public void reinitialize(){
 		this.currentPlayer=Colore.WHITE;
 		//TODO: posizionare i pezzi
+	}
+	
+	public Colore getPlayerColor(){
+		return this.currentPlayer;
 	}
 	
 	public void close(){
