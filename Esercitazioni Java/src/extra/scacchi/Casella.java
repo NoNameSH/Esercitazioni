@@ -1,6 +1,6 @@
 package extra.scacchi;
 
-class Casella {
+public class Casella {
 	
 	private final int x,y;
 

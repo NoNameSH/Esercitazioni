@@ -2,6 +2,8 @@ package extra.scacchi;
 
 import java.util.Scanner;
 
+//Needs UTF-8 encoding to print
+
 public class Scacchiera {
 	private Pezzo[][] caselle;
 	private Colore currentPlayer;
@@ -18,7 +20,7 @@ public class Scacchiera {
 		Casella c1, c2;
 		Pezzo p;
 		try {
-			System.out.println("Fai la tua mossa, giocatore" + this.currentPlayer);
+			System.out.println("Fai la tua mossa, giocatore " + this.currentPlayer);
 			System.out.println("Muovi dalla casella di riga: ");
 			x = scanner.nextInt();
 			System.out.println("               e di colonna: ");
@@ -52,6 +54,16 @@ public class Scacchiera {
 	public void reinitialize(){
 		this.currentPlayer=Colore.WHITE;
 		//TODO: posizionare i pezzi
+		//just for testing
+		for (int i = 0; i < SIZE; i++) {
+			for (int j = 0; j < SIZE; j++) {
+				if(j%2==0)
+					caselle[i][j] = new Re(Colore.WHITE);
+				else
+					caselle[i][j] = new Re(Colore.BLACK);
+					
+			}
+		}	
 	}
 	
 	public Colore getPlayerColor(){
@@ -76,6 +88,20 @@ public class Scacchiera {
 		Pezzo ret = this.getPezzo(c);
 		this.setPezzo(null, c);
 		return ret;
-	}	
+	}
+	
+	@Override
+	public String toString(){
+		//TODO: simply for quick test purpose. 
+		StringBuffer buffer = new StringBuffer();
+		for (Pezzo[] riga : caselle) {
+			for (Pezzo p : riga) {
+				if(p!=null)
+					buffer.append(p.toString());
+			}
+		}
+		
+		return buffer.toString();
+	}
 
 }
