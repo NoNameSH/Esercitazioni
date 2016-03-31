@@ -37,7 +37,7 @@ class Torre extends Pezzo {
 
 	@Override
 	public boolean mossaValida(Scacchiera s, Casella c1, Casella c2) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
