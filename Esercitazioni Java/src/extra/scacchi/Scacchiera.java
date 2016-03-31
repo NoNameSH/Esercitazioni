@@ -37,7 +37,7 @@ public class Scacchiera {
 		}
 		
 		p = this.getPezzo(c1);
-		if(p.getColor()==currentPlayer && p.mossaValida(this, c1, c2)){
+		if(p!=null && p.getColor()==currentPlayer && p.mossaValida(this, c1, c2)){
 			this.setPezzo(this.unsetPezzo(c1), c2);
 			
 			//cambia giocatore
@@ -57,10 +57,10 @@ public class Scacchiera {
 		//just for testing
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
-				if(j%2==0)
-					caselle[i][j] = new Re(Colore.WHITE);
+				if(j%2==0)//colonne bianche e nere alternate
+					caselle[i][j] = new Torre(Colore.WHITE);
 				else
-					caselle[i][j] = new Re(Colore.BLACK);
+					caselle[i][j] = new Torre(Colore.BLACK);
 					
 			}
 		}	
@@ -94,13 +94,18 @@ public class Scacchiera {
 	public String toString(){
 		//TODO: simply for quick test purpose. 
 		StringBuffer buffer = new StringBuffer();
-		for (Pezzo[] riga : caselle) {
-			for (Pezzo p : riga) {
+		Pezzo p;
+		for (int i = 0; i < SIZE; i++) {
+			for (int j = 0; j < SIZE; j++) {
+				p=caselle[i][j];
 				if(p!=null)
 					buffer.append(p.toString());
+				else
+					buffer.append('_');
+				buffer.append("("+(i+1)+","+(j+1)+")");
 			}
-		}
-		
+			buffer.append('\n');
+		}	
 		return buffer.toString();
 	}
 
