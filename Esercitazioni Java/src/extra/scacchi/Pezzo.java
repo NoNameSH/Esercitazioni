@@ -49,4 +49,66 @@ class Torre extends Pezzo {
 	
 }
 
+class Alfiere extends Pezzo {
 
+	@Override
+	public boolean mossaValida(Scacchiera s, Casella c1, Casella c2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}
+
+class Cavallo extends Pezzo {
+
+	@Override
+	public boolean mossaValida(Scacchiera s, Casella c1, Casella c2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}
+
+class Re extends Pezzo {
+
+	@Override
+	public boolean mossaValida(Scacchiera s, Casella c1, Casella c2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}
+
+class Regina extends Pezzo {
+
+	@Override
+	public boolean mossaValida(Scacchiera s, Casella c1, Casella c2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}
