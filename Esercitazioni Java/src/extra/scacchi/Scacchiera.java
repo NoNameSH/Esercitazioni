@@ -8,9 +8,21 @@ public class Scacchiera {
 		caselle = new Pezzo[SIZE][SIZE];		
 	}
 	
-	public Pezzo getPezzo(Casella c)
-	{
-		
+	public Pezzo getPezzo(Casella c){
+		return caselle[c.getX()][c.getY()];
 	}
+	
+	public Pezzo setPezzo(Pezzo p, Casella c){
+		Pezzo ret = this.getPezzo(c);
+		this.caselle[c.getX()][c.getY()]=p;
+		return ret;
+	}
+	
+	public Pezzo unsetPezzo(Casella c){
+		Pezzo ret = this.getPezzo(c);
+		this.setPezzo(null, c);
+		return ret;
+	}
+	
 
 }
