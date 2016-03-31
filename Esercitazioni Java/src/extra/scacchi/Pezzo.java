@@ -15,4 +15,20 @@ abstract class Pezzo {
 	public abstract String toString();
 }
 
+class Pedone extends Pezzo{
+
+	@Override
+	public boolean mossaValida(Scacchiera s, Casella c1, Casella c2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}
+
 
