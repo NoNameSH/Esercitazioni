@@ -65,9 +65,6 @@ public class Scacchiera {
 		Pezzo ret = this.getPezzo(c);
 		this.setPezzo(null, c);
 		return ret;
-	}
-	
-	public Colore getPlayerColor
-	
+	}	
 
 }
