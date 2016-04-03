@@ -71,23 +71,30 @@ class Torre extends Pezzo {
 			return false;
 		
 		//controllo mossa: muove solo in orizzontale o in verticale
-		int dx = c1.getX()-c2.getX();
-		int dy = c1.getY()-c2.getY();
-		
+		int dx = c2.getX()-c1.getX();
+		int dy = c2.getY()-c1.getY();
+					
 		if(dx==0 && dy==0)
 			return false;
 		if(Math.abs(dx)>0 && Math.abs(dy)>0)
 			return false;
 		
 		//controllo percorso libero
-		if(dy==0)
-			for (int i = 1; i < dx-1; i++) {
-				if(s.getPezzo(new Casella(c1.getX()+i,c1.getY()))!=null)
+		int verso_x=1, verso_y=1;
+		if(dx<0)
+			verso_x=-1;
+		if(dy<0)
+			verso_y=-1;
+		
+		
+		if(dy==0)//muove in orizzontale
+			for (int i = 1; i < Math.abs(dx)-1; i++) {
+				if(s.getPezzo(new Casella(c1.getX()+verso_x*i,c1.getY()))!=null)
 					return false;
 			}
-		else//dx==0
-			for (int i = 1; i < dy-1; i++) {
-				if(s.getPezzo(new Casella(c1.getX(),c1.getY()+i))!=null)
+		else//dx==0, muove in verticale
+			for (int i = 1; i < Math.abs(dy)-1; i++) {
+				if(s.getPezzo(new Casella(c1.getX(),c1.getY()+verso_y*i))!=null)
 					return false;
 			}
 		

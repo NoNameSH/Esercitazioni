@@ -16,21 +16,21 @@ public class Scacchiera {
 	}
 	
 	public void turn(){
-		int x,y;
+		int riga,colonna;
 		Casella c1, c2;
 		Pezzo p;
 		try {
 			System.out.println("Fai la tua mossa, giocatore " + this.currentPlayer);
 			System.out.println("Muovi dalla casella di riga: ");
-			x = scanner.nextInt();
+			riga = scanner.nextInt();
 			System.out.println("               e di colonna: ");
-			y = scanner.nextInt();
-			c1 = new Casella(x,y);
+			colonna = scanner.nextInt();
+			c1 = new Casella(riga-1,colonna-1);
 			System.out.println("Alla casella di riga: ");
-			x = scanner.nextInt();
+			riga = scanner.nextInt();
 			System.out.println("        e di colonna: ");
-			y = scanner.nextInt();
-			c2 = new Casella(x,y);			
+			colonna = scanner.nextInt();
+			c2 = new Casella(riga-1,colonna-1);			
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return;
