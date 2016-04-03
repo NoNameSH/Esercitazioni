@@ -49,10 +49,10 @@ class Pedone extends Pezzo{
 		int dx = c2.getX()-c1.getX();
 		int dy = c2.getY()-c1.getY();
 		
-		if(this.getColor()==Colore.BLACK)
+		if(this.getColor()==Colore.WHITE)//oss:può sembrare il contrario ma è perchè le righe sono numerate dall'alto verso il basso
 			dy = -dy; //in questo modo l'analisi è la stessa di quella delle mosse di un pedone bianco
 		
-		//controllo mossa
+		//controllo mossa	
 		
 		if(dx==0){
 			//spostamento senza mangiare

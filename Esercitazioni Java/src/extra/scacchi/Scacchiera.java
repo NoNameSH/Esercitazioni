@@ -21,22 +21,23 @@ public class Scacchiera {
 	}
 	
 	public void turn(){
-		int riga,colonna;
+		int x,y;
 		Casella c1, c2;
 		Pezzo p;
 		try {
 			System.out.println("TURNO " + turn_counter);
 			System.out.println("Fai la tua mossa, giocatore " + this.currentPlayer);
-			System.out.println("Muovi dalla casella di riga: ");
-			riga = scanner.nextInt();
-			System.out.println("               e di colonna: ");
-			colonna = scanner.nextInt();
-			c1 = new Casella(riga-1,colonna-1);
-			System.out.println("Alla casella di riga: ");
-			riga = scanner.nextInt();
-			System.out.println("        e di colonna: ");
-			colonna = scanner.nextInt();
-			c2 = new Casella(riga-1,colonna-1);			
+			System.out.println("Muovi dalla casella di posizione X1: ");
+			x = scanner.nextInt();
+			System.out.println("               e di posizione Y1: ");
+			y = scanner.nextInt();
+			c1 = new Casella(x-1, y-1);
+			System.out.println
+			("Alla casella di posizione X2: ");
+			x = scanner.nextInt();
+			System.out.println("        e di posizione Y2: ");
+			y = scanner.nextInt();
+			c2 = new Casella(x-1, y-1);			
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return;
@@ -62,17 +63,29 @@ public class Scacchiera {
 	public void reinitialize(){
 		this.turn_counter=1;
 		this.currentPlayer=Colore.WHITE;
-		//TODO: posizionare i pezzi
-		//just for testing
-		for (int i = 0; i < SIZE; i++) {
-			for (int j = 0; j < SIZE; j++) {
-				if(j%2==0)//colonne bianche e nere alternate
-					caselle[i][j] = new Torre(Colore.WHITE);
-				else
-					caselle[i][j] = new Torre(Colore.BLACK);
-					
-			}
-		}	
+		
+		caselle[0][0] = new Torre(Colore.BLACK);
+		caselle[1][0] = new Cavallo(Colore.BLACK);
+		caselle[2][0] = new Alfiere(Colore.BLACK);
+		caselle[3][0] = new Regina(Colore.BLACK);
+		caselle[4][0] = new Re(Colore.BLACK);
+		caselle[5][0] = new Alfiere(Colore.BLACK);
+		caselle[6][0] = new Cavallo(Colore.BLACK);
+		caselle[7][0] = new Torre(Colore.BLACK);
+
+		for (int i = 0; i < SIZE; i++)
+			caselle[i][1] = new Pedone(Colore.BLACK);
+		for (int i = 0; i < SIZE; i++)
+			caselle[i][6] = new Pedone(Colore.WHITE);
+
+		caselle[0][7] = new Torre(Colore.WHITE);
+		caselle[1][7] = new Cavallo(Colore.WHITE);
+		caselle[2][7] = new Alfiere(Colore.WHITE);
+		caselle[3][7] = new Regina(Colore.WHITE);
+		caselle[4][7] = new Re(Colore.WHITE);
+		caselle[5][7] = new Alfiere(Colore.WHITE);
+		caselle[6][7] = new Cavallo(Colore.WHITE);
+		caselle[7][7] = new Torre(Colore.WHITE);
 	}
 	
 	public Colore getPlayerColor(){
@@ -104,14 +117,14 @@ public class Scacchiera {
 		//TODO: simply for quick test purpose. 
 		StringBuffer buffer = new StringBuffer();
 		Pezzo p;
-		for (int i = 0; i < SIZE; i++) {
-			for (int j = 0; j < SIZE; j++) {
-				p=caselle[i][j];
+		for (int y = 0; y < SIZE; y++) {
+			for (int x = 0; x < SIZE; x++) {
+				p=caselle[x][y];
 				if(p!=null)
 					buffer.append(p.toString());
 				else
 					buffer.append('_');
-				buffer.append("("+(i+1)+","+(j+1)+")");
+				buffer.append("("+(x+1)+","+(y+1)+")");
 			}
 			buffer.append('\n');
 		}	
