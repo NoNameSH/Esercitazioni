@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Scacchiera {
 	private Pezzo[][] caselle;
 	private Colore currentPlayer;
+	private int turn_counter;
 	private static final int SIZE = 8;
 	private Scanner scanner = new Scanner(System.in);
 	
@@ -15,11 +16,16 @@ public class Scacchiera {
 		reinitialize();
 	}
 	
+	public int getTurnCounter(){
+		return this.turn_counter;
+	}
+	
 	public void turn(){
 		int riga,colonna;
 		Casella c1, c2;
 		Pezzo p;
 		try {
+			System.out.println("TURNO " + turn_counter);
 			System.out.println("Fai la tua mossa, giocatore " + this.currentPlayer);
 			System.out.println("Muovi dalla casella di riga: ");
 			riga = scanner.nextInt();
@@ -40,6 +46,8 @@ public class Scacchiera {
 		if(p!=null && p.getColor()==currentPlayer && p.mossaValida(this, c1, c2)){
 			this.setPezzo(this.unsetPezzo(c1), c2);
 			
+			//avanza turno
+			this.turn_counter++;
 			//cambia giocatore
 			if(this.currentPlayer==Colore.BLACK)
 				currentPlayer=Colore.WHITE;
@@ -52,6 +60,7 @@ public class Scacchiera {
 	}
 	
 	public void reinitialize(){
+		this.turn_counter=1;
 		this.currentPlayer=Colore.WHITE;
 		//TODO: posizionare i pezzi
 		//just for testing

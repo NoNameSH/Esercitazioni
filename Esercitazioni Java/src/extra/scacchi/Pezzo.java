@@ -43,7 +43,39 @@ class Pedone extends Pezzo{
 	@Override
 	public boolean mossaValida(Scacchiera s, Casella c1, Casella c2) {
 		// TODO Auto-generated method stub
+		//colore del pezzo da muovere e boundary scacchiera gi� controllati
+		
+		//raccolta dati per analisi
+		int dx = c2.getX()-c1.getX();
+		int dy = c2.getY()-c1.getY();
+		
+		if(this.getColor()==Colore.BLACK)
+			dy = -dy; //in questo modo l'analisi è la stessa di quella delle mosse di un pedone bianco
+		
+		//controllo mossa
+		
+		if(dx==0){
+			//spostamento senza mangiare
+			if(c1.getY()==1 || c1.getY()==6){
+				//il pedone può fare due salti se si trova nella posizione originale
+				//per verificarlo basta la riga in quanto il pedone non può tornare indietro e quando raggiunge la riga dei pedoni avversari andare avanti di 2 non è comunque consentito (out of boundary)
+				if(dy==1||dy==2)
+					return true;//non serve verificare se il percorso è libero
+				else
+					return false;
+			}
+			else/*non è il primo spostamento*/ if(dy==1 && s.getPezzo(c2)==null)
+				return true;
+			else
+				return false;
+		}
+		if(Math.abs(dx)==1){
+			//spostamento per mangiare
+			if(dy==1 && s.getPezzo(c2)!=null && s.getPezzo(c2).getColor()!=this.getColor())
+				return true;
+		}
 		return false;
+		
 	}
 
 	@Override
@@ -88,12 +120,12 @@ class Torre extends Pezzo {
 		
 		
 		if(dy==0)//muove in orizzontale
-			for (int i = 1; i < Math.abs(dx)-1; i++) {
+			for (int i = 1; i < Math.abs(dx); i++) {
 				if(s.getPezzo(new Casella(c1.getX()+verso_x*i,c1.getY()))!=null)
 					return false;
 			}
 		else//dx==0, muove in verticale
-			for (int i = 1; i < Math.abs(dy)-1; i++) {
+			for (int i = 1; i < Math.abs(dy); i++) {
 				if(s.getPezzo(new Casella(c1.getX(),c1.getY()+verso_y*i))!=null)
 					return false;
 			}
