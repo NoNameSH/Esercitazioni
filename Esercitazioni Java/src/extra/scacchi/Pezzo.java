@@ -198,8 +198,8 @@ class Alfiere extends Pezzo {
 		}
 		
 		
-			
-		return false;
+		//mossa corretta
+		return true;
 	}
 
 	@Override
