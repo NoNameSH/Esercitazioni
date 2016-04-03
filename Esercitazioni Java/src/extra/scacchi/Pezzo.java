@@ -160,13 +160,44 @@ class Alfiere extends Pezzo {
 			return false;
 				
 		//controllo mossa: muove solo in diagonale
-		int dx = Math.abs(c2.getX()-c1.getX());
-		int dy = Math.abs(c2.getY()-c1.getY());
+		int dx = c2.getX()-c1.getX();
+		int dy = c2.getY()-c1.getY();
 						
-		if(dx!=dy){
+		if(Math.abs(dx)!=Math.abs(dy)){
 			System.out.println("Mossa non diagonale");
 			return false;
 		}
+		
+		//controllo strada libera
+		int min, i;
+		if (c1.getX()>c1.getY()) //valuta se la pedina è più vicina al bordo sinistro o a quello superiore
+			min = c1.getY(); //è più vicina al superiore
+		else min = c1.getX(); //è più vicina al sinistro oppure è sulla diagonale
+		if (dx * dy > 0){//spostamenti concordi su traiettoria = \
+			if (dx > 0){//verso destra/giù
+				for (i=1;i<=min;i++)
+					if(s.getPezzo(new Casella(c1.getX()+i,c1.getY()+i))!=null)
+						return false;
+			}
+			else // verso sinistra/su
+				for (i=1;i<=min;i++)
+					if(s.getPezzo(new Casella(c1.getX()-i,c1.getY()-i))!=null)
+						return false;
+		}
+		else{//traiettoria = /
+			if (dx > 0){//verso destra/su
+				for (i=1;i<=min;i++)
+					if(s.getPezzo(new Casella(c1.getX()+i,c1.getY()-i))!=null)
+						return false;
+				;
+			}
+			else //verso sinistra/giù
+				for (i=1;i<=min;i++)
+					if(s.getPezzo(new Casella(c1.getX()-i,c1.getY()+i))!=null)
+						return false;
+		}
+		
+		
 			
 		return false;
 	}
