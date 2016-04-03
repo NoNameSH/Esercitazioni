@@ -121,7 +121,21 @@ class Alfiere extends Pezzo {
 
 	@Override
 	public boolean mossaValida(Scacchiera s, Casella c1, Casella c2) {
-		// TODO Auto-generated method stub
+		//colore del pezzo da muovere e boundary scacchiera gi� controllati
+		
+		//controllo casella di arrivo: ok se vuota o con pezzo di colore diverso;
+		if(s.getPezzo(c2)!=null && s.getPezzo(c2).getColor()==this.getColor())
+			return false;
+				
+		//controllo mossa: muove solo in diagonale
+		int dx = Math.abs(c2.getX()-c1.getX());
+		int dy = Math.abs(c2.getY()-c1.getY());
+						
+		if(dx!=dy){
+			System.out.println("Mossa non diagonale");
+			return false;
+		}
+			
 		return false;
 	}
 
