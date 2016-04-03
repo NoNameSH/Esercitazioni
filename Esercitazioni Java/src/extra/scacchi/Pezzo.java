@@ -169,30 +169,28 @@ class Alfiere extends Pezzo {
 		}
 		
 		//controllo strada libera
-		int min, i;
-		if (c1.getX()>c1.getY()) //valuta se la pedina è più vicina al bordo sinistro o a quello superiore
-			min = c1.getY(); //è più vicina al superiore
-		else min = c1.getX(); //è più vicina al sinistro oppure è sulla diagonale
+		int i, passi;
+		passi = Math.abs(c2.getX()-c1.getX()-1);
 		if (dx * dy > 0){//spostamenti concordi su traiettoria = \
 			if (dx > 0){//verso destra/giù
-				for (i=1;i<=min;i++)
+				for (i=1;i<=passi;i++)
 					if(s.getPezzo(new Casella(c1.getX()+i,c1.getY()+i))!=null)
 						return false;
 			}
 			else // verso sinistra/su
-				for (i=1;i<=min;i++)
+				for (i=1;i<=passi;i++)
 					if(s.getPezzo(new Casella(c1.getX()-i,c1.getY()-i))!=null)
 						return false;
 		}
 		else{//traiettoria = /
 			if (dx > 0){//verso destra/su
-				for (i=1;i<=min;i++)
+				for (i=1;i<=passi;i++)
 					if(s.getPezzo(new Casella(c1.getX()+i,c1.getY()-i))!=null)
 						return false;
 				;
 			}
 			else //verso sinistra/giù
-				for (i=1;i<=min;i++)
+				for (i=1;i<=passi;i++)
 					if(s.getPezzo(new Casella(c1.getX()-i,c1.getY()+i))!=null)
 						return false;
 		}
