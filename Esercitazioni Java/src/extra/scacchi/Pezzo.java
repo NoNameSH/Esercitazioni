@@ -162,41 +162,21 @@ class Alfiere extends Pezzo {
 		//controllo mossa: muove solo in diagonale
 		int dx = c2.getX()-c1.getX();
 		int dy = c2.getY()-c1.getY();
+		int segno_dx=(int) Math.signum(dx);
+		int segno_dy=(int) Math.signum(dy);
+		
 						
 		if(Math.abs(dx)!=Math.abs(dy)){
-			System.out.println("Mossa non diagonale");
+			System.err.println("Mossa non diagonale");
 			return false;
 		}
 		
 		//controllo strada libera
-		int i, passi;
-		passi = Math.abs(c2.getX()-c1.getX()-1);
-		if (dx * dy > 0){//spostamenti concordi su traiettoria = \
-			if (dx > 0){//verso destra/giù
-				for (i=1;i<=passi;i++)
-					if(s.getPezzo(new Casella(c1.getX()+i,c1.getY()+i))!=null)
-						return false;
-			}
-			else // verso sinistra/su
-				for (i=1;i<=passi;i++)
-					if(s.getPezzo(new Casella(c1.getX()-i,c1.getY()-i))!=null)
-						return false;
-		}
-		else{//traiettoria = /
-			if (dx > 0){//verso destra/su
-				for (i=1;i<=passi;i++)
-					if(s.getPezzo(new Casella(c1.getX()+i,c1.getY()-i))!=null)
-						return false;
-				;
-			}
-			else //verso sinistra/giù
-				for (i=1;i<=passi;i++)
-					if(s.getPezzo(new Casella(c1.getX()-i,c1.getY()+i))!=null)
-						return false;
-		}
-		
-		
-		//mossa corretta
+		for(int i=1; i<Math.abs(dx); i++)
+			if(s.getPezzo(new Casella(c1.getX()+segno_dx*i, c1.getY()+segno_dy*i))!=null)
+				//ostruita
+				return false;
+		//libera:
 		return true;
 	}
 
